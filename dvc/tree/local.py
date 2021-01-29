@@ -246,6 +246,8 @@ class LocalTree(BaseTree):
         path = os.fspath(path_info)
         try:
             os.chmod(path, mode)
+        except PermissionError:
+            pass
         except OSError:
             # NOTE: not being able to protect cache file is not fatal, it
             # might happen on funky filesystems (e.g. Samba, see #5255),
